@@ -1,22 +1,24 @@
 import React from "react";
 
-const LocationSearchPanel = (props) => {
-  const locations = [
-    "H-9 Aurobindo hostel Mnit Jaipur, Malviya Nagar",
-    "VLTC front Porch Mnit Jaipur, Malviya Nagar",
-    "Prabha Bhawan Mnit Jaipur, Malviya Nagar",
-    "Dean Gate, JLN Marg, Mnit Jaipur, Malviya Nagar",
-  ];
+const LocationSearchPanel = ({suggestions , setVehiclePanel , setPanelOpen , setPickup , setDestination , activeField}) => {
+  
+  const handleSuggestionClick = (suggestion) => {
+    if(activeField === 'pickup'){
+      setPickup(suggestion)
+    }
+    else if(activeField === 'destination'){
+      setDestination(suggestion);
+    }
+  }
 
   return (
     <div>
-      {locations.map(function (element , idx) {
+      {suggestions.map(function (element , idx) {
         return (
           <div
             key={idx}
             onClick={() => {
-              props.setVehiclePanel(true);
-              props.setPanelOpen(false);
+              handleSuggestionClick(element)
             }}
             className="flex gap-4 border-2 p-3 border-white active:border-black rounded-xl my-2 items-center jutify-start"
           >
